@@ -1,0 +1,10 @@
+void MOVE(int Rpower, Lpower);
+void debug_pht();
+void debug_motor();
+int judge_phase();
+int get_distance();
+void rescue();
+void crossing();
+void rightangle();
+void obstacle;
+void linetrace();
