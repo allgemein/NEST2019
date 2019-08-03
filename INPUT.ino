@@ -1,5 +1,6 @@
-#pragma once
 #include"define.h"
+#include"pin.h"
+#include"prototype.h"
 
 int get_distance(int position){
 
@@ -7,7 +8,7 @@ int get_distance(int position){
 
 	switch(position){
 
-		case R_USSR:
+		case R_position:
 			digitalWrite(USSRtrigR,LOW);
 			delayMicroseconds(2);
 			digitalWrite(USSRtrigR,HIGH);
@@ -15,7 +16,7 @@ int get_distance(int position){
 			digitalWrite(USSRtrigR,LOW);
 			time=pulseIn(USSRechoR,HIGH,100000);
 
-		case F_USSR:	
+		case F_position:	
 			digitalWrite(USSRtrigF,LOW);
 			delayMicroseconds(2);
 			digitalWrite(USSRtrigF,HIGH);
@@ -23,7 +24,7 @@ int get_distance(int position){
 			digitalWrite(USSRtrigF,LOW);
 			time=pulseIn(USSRechoF,HIGH,100000);
 
-		case L_USSR:	
+		case L_position:	
 			digitalWrite(USSRtrigL,LOW);
 			delayMicroseconds(2);
 			digitalWrite(USSRtrigL,HIGH);
