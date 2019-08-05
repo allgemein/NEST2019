@@ -2,7 +2,7 @@
 #include"pin.h"
 #include"prototype.h"
 
-int get_distance(int position){
+int get_distance(int position){//超音波センサ読み取り関数
 
 	int Dis,time;
 
@@ -43,4 +43,22 @@ int get_distance(int position){
 
 	return Dis;
 
+}
+
+int count_pht_silver(){//銀色を読み取った後部フォトリフレクタの数を数える関数
+	int count = 0;
+	if(analogRead(phtLl)>limen_silver) count++;
+	if(analogRead(phtLr)>limen_silver) count++;
+	if(analogRead(phtRl)>limen_silver) count++;
+	if(analogRead(phtRr)>limen_silver) count++;
+	return count;
+}
+
+int count_backpht_black(){//黒を読み取った後部フォトリフレクタの数を数える関数
+	int count = 0;
+	if(analogRead(phtLl)<limen) count++;
+	if(analogRead(phtLr)<limen) count++;
+	if(analogRead(phtRl)<limen) count++;
+	if(analogRead(phtRr)<limen) count++;
+	return count;
 }

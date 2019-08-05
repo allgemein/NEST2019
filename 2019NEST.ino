@@ -4,10 +4,12 @@
 
 void setup(){
 	Serial.begin(9600);
+	//シリアル通信を開始。速度は求められないので9600でいいだろう
 	pinMode(USSRtrigR,OUTPUT);
 	pinMode(USSRtrigL,OUTPUT);
 	pinMode(USSRechoR,INPUT);
 	pinMode(USSRtrigL,INPUT);
+	//超音波センサ用のデジタルピンのpinMode
 }
 
 void loop(){
@@ -16,15 +18,17 @@ void loop(){
 	debug_pht();
 	delay(200);
 	}
-	while(1){
+	while(0){
 	debug_motor();
 	}
+	//モータとフォトリフレクタのデバッグ用関数。使いたいときはwhie文の中身をtrue(=1)にすればよい
 
 	int phase=judge_phase();
+	//今何をするべきかを判断してphaseに値を代入する。下のswitchcase文の分岐に使う
 	
 	//debug_pht();
 	
-	switch(phase){
+	switch(phase){//judge_phaseで決定したフェーズに移行する
 		case case_rescue:
 			rescue();
 			break;
@@ -33,19 +37,20 @@ void loop(){
 			crossing();
 			break;
 
-		case case_rightangle:
-			rightangle();
+		case case_Rrightangle:
+			rightangle(R_position);
+			break;
+
+		case case_Lrightangle:
+			rightangle(L_position);
 			break;
 
 		case case_obstacle:
 			obstacle();
 			break;
 
-		case case_linetrace:
+		default: 
 			linetrace();
-			break;
-
-		default:
 			break;
 	}
 }

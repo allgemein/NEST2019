@@ -2,7 +2,7 @@
 #include"pin.h"
 #include"prototype.h"
 
-void crossing(){
+void crossing(){//交差点処理関数
 	int i,count,num_of_loop_to_back_line_width,greenR,greenL;
 	count = 0;
 	while(analogRead(phtLl)>limen && analogRead(phtLr)>limen && analogRead(phtRl)>limen && analogRead(phtRr)>limen &&analogRead(phtC)<limen){//中央センサ黒、その他白となるまで
@@ -26,15 +26,15 @@ void crossing(){
 	greenL=get_colorG(L_position);
 	//照度センサで緑の値を取得
 
-	if(greenR>green_limen && greenL<green_limen){
+	if(greenR>limen_green && greenL<limen_green){
 		turn(R_position);
 	}//右のみ緑の場合右折
 
-	else if(greenR<green_limen && greenL>green_limen){
+	else if(greenR<limen_green && greenL>limen_green){
 		turn(R_position);
 	}//左のみ緑の場合左折
 
-	else if(greenR>green_limen && greenL>green_limen){
+	else if(greenR>limen_green && greenL>limen_green){
 		turn(Uturn);
 	}//左右ともに緑の場合Uターン
 

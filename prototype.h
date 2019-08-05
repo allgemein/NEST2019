@@ -5,6 +5,8 @@ void debug_motor();
 int judge_phase();
 int get_distance();
 int get_colorG(int position);
+int count_pht_silver();
+int count_backpht_black();
 void turn(int position);
 void rescue();
 void crossing();
