@@ -4,10 +4,10 @@
 
 int judge_phase(){
 	int phase;
-	if(count_pht_silver()>=3) phase = case_rescue;//‹âƒe[ƒv‚ğ“¥‚ñ‚Å‚¢‚é‚©‚Ç‚¤‚©
-	else if(count_backpht_black()>=3) phase = case_crossing;//Œğ·“_‚©‚Ç‚¤‚©
-	else if((analogRead(phtLl)<limen&&analogRead(phtLr)<limen)&&!(analogRead(phtRl)<limen&&analogRead(phtRr)<limen)) phase = case_Lrightangle;//¶’¼Šp‚©‚Ç‚¤‚©
-	else if(!(analogRead(phtLl)<limen&&analogRead(phtLr)<limen)&&(analogRead(phtRl)<limen&&analogRead(phtRr)<limen)) phase = case_Rrightangle;//‰E’¼Šp‚©‚Ç‚¤‚©
-	else if(get_distance(F_position)<10) phase = case_obstacle;//áŠQ•¨‚ª‚ ‚é‚©‚Ç‚¤‚©
-	else phase = 1024;//‚»‚Ì‘¼‚Ìê‡(=ƒ‰ƒCƒ“ƒgƒŒ[ƒX)B’l‚Í“K“–
+	if(count_pht_silver()>=3) phase = case_rescue;//éŠ€ãƒ†ãƒ¼ãƒ—ã‚’é€šã£ãŸã¨ã
+	else if(count_backpht_black()>=3) phase = case_crossing;//é»’ã„ç·šã®ä¸Šã«ä¹—ã£ãŸã¨ã
+	else if((analogRead(phtLl)<limen&&analogRead(phtLr)<limen)&&!(analogRead(phtRl)<limen&&analogRead(phtRr)<limen)) phase = case_Lrightangle;//å·¦å´ã®ãƒ•ã‚©ãƒˆãƒªãƒ•ãƒ¬ã‚¯ã‚¿ã®ã¿é»’ã«ãªã£ãŸã¨ã
+	else if(!(analogRead(phtLl)<limen&&analogRead(phtLr)<limen)&&(analogRead(phtRl)<limen&&analogRead(phtRr)<limen)) phase = case_Rrightangle;//å³å´ã®ãƒ•ã‚©ãƒˆãƒªãƒ•ãƒ¬ã‚¯ã‚¿ã®ã¿é»’ã«ãªã£ãŸã¨ã
+	else if(get_distance(F_position)<10) phase = case_obstacle;//10cmæœªæº€ã®è·é›¢ã«ç‰©ä½“ãŒã‚ã£ãŸã¨ã
+	else phase = 1024;//æ™®é€šã®ãƒ©ã‚¤ãƒ³ãƒˆãƒ¬ãƒ¼ã‚¹ã«ç§»è¡Œã™ã‚‹ã¨ãã€‚å€¤ã¯é©å½“
 }

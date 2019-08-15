@@ -2,7 +2,7 @@
 #include"pin.h"
 #include"prototype.h"
 
-void MOVE(int Lpower,int Rpower){
+void MOVE(int Lpower,int Rpower){//みんな大好きMOVE関数
 
 	if(Lpower>255) Lpower=255;
 	if(Lpower<-255) Lpower=-255;
@@ -27,4 +27,12 @@ void MOVE(int Lpower,int Rpower){
 		analogWrite(motorR2,-Rpower);
 	}
 
+}
+
+void brake(){//モータのブレーキ関数。慣性で回り続けるのが気になるときに
+	analogWrite(motorL1,255);
+	analogWrite(motorL2,255);
+	analogWrite(motorR1,255);
+	analogWrite(motorR2,255);
+	delay(50);
 }

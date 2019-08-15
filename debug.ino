@@ -1,7 +1,7 @@
 #include "define.h"
 #include"pin.h"
 #include"prototype.h"
-void debug_pht(){//ƒfƒoƒbƒO‹y‚ÑŽŽŒ±‘–sŽž—p‚ÌƒtƒHƒgƒŠƒtƒŒƒNƒ^“Ç‚ÝŽæ‚è’l•\Ž¦ŠÖ”B
+void debug_pht(){//ãƒ•ã‚©ãƒˆãƒªãƒ•ãƒ¬ã‚¯ã‚¿ã®èª­ã¿å–ã‚Šå€¤ã‚’ã‚·ãƒªã‚¢ãƒ«ãƒ¢ãƒ‹ã‚¿ã«è¡¨ç¤ºã™ã‚‹é–¢æ•°
 	char str[124];
 
 	int valLl = analogRead(phtLl);
@@ -10,23 +10,27 @@ void debug_pht(){//ƒfƒoƒbƒO‹y‚ÑŽŽŒ±‘–sŽž—p‚ÌƒtƒHƒgƒŠƒtƒŒƒNƒ^“Ç‚ÝŽæ‚è’l•\Ž¦ŠÖ”
 	int valRl = analogRead(phtRl);
 	int valRr = analogRead(phtRr);
 
-	sprintf(str,"pht: %4d%4d%4d%4d%4d",valLl,valLr,valC,valRl,valRr);
+	sprintf(str,"  pht: %4d%4d%4d%4d%4d",valLl,valLr,valC,valRl,valRr);
 	Serial.println(str);
 
 	}
 
-void debug_motor(){//‘Oi¨Œã‘Þ¨¶‘OiŒã‘Þ¨‰E‘OiŒã‘Þ¨’âŽ~‚Ì‡‚ÅŒJ‚è•Ô‚·ŠÖ”BƒfƒoƒbƒO—p
+void debug_motor(){//ãƒ¢ãƒ¼ã‚¿ã‚’ãƒ‡ãƒãƒƒã‚°ã—ãŸã„ã¨ãç”¨ã€‚åŽŸå‰‡ã¨ã—ã¦å·¦å´ãŒå…ˆã«å‹•ãã€‚
 
 	MOVE(255,255);
 	delay(750);
 	MOVE(-255,-255);
 	delay(750);
+	brake();
 	MOVE(255,0);
 	delay(750);
+	brake();
 	MOVE(-255,0);
 	delay(750);
+	brake();
 	MOVE(0,255);
 	delay(750);
+	brake();
 	MOVE(0,-255);
 	delay(750);
 	MOVE(0,0);
@@ -34,12 +38,15 @@ void debug_motor(){//‘Oi¨Œã‘Þ¨¶‘OiŒã‘Þ¨‰E‘OiŒã‘Þ¨’âŽ~‚Ì‡‚ÅŒJ‚è•Ô‚·ŠÖ”
 
 	}
 
-//«HŽ–’†
+//ä»¥ä¸‹å·¥äº‹ä¸­
 void rescue(){
 	Serial.println("test");
 }
 void rightangle(int position){
-	Serial.println("test");
+	while(analogRead(phtC)>limen){
+		if(position==R_position) MOVE(255,-255);
+		else MOVE(-255,255);
+	}
 }
 int get_colorG(int position){
 	Serial.println("test");
@@ -48,3 +55,4 @@ int get_colorG(int position){
 void turn(int position){
 	Serial.println("test");
 }
+

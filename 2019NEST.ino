@@ -4,16 +4,20 @@
 
 void setup(){
 	Serial.begin(9600);
-	//ƒVƒŠƒAƒ‹’ÊM‚ğŠJnB‘¬“x‚Í‹‚ß‚ç‚ê‚È‚¢‚Ì‚Å9600‚Å‚¢‚¢‚¾‚ë‚¤
+	Serial.setTimeout(5);
+	//ã‚·ãƒªã‚¢ãƒ«é€šä¿¡ã‚’é–‹å§‹ã€‚é€Ÿåº¦ã¯æ±‚ã‚ã‚‰ã‚Œãªã„ã®ã§9600ã§ã„ã„ã ã‚ã†
 	pinMode(USSRtrigR,OUTPUT);
 	pinMode(USSRtrigL,OUTPUT);
 	pinMode(USSRechoR,INPUT);
-	pinMode(USSRtrigL,INPUT);
-	//’´‰¹”gƒZƒ“ƒT—p‚ÌƒfƒWƒ^ƒ‹ƒsƒ“‚ÌpinMode
+	pinMode(USSRechoL,INPUT);
+	//è¶…éŸ³æ³¢ã‚»ãƒ³ã‚µç”¨ã®ãƒ‡ã‚¸ã‚¿ãƒ«ãƒ”ãƒ³ã®pinMode
 }
 
 void loop(){
-
+	while(1){
+	get_distance(R_position);
+	delay(50);
+	}
 	while(0){
 	debug_pht();
 	delay(200);
@@ -21,14 +25,17 @@ void loop(){
 	while(0){
 	debug_motor();
 	}
-	//ƒ‚[ƒ^‚ÆƒtƒHƒgƒŠƒtƒŒƒNƒ^‚ÌƒfƒoƒbƒO—pŠÖ”Bg‚¢‚½‚¢‚Æ‚«‚Íwhie•¶‚Ì’†g‚ğtrue(=1)‚É‚·‚ê‚Î‚æ‚¢
+	while(1){
+	linetrace();
+	}
+	//ãƒ¢ãƒ¼ã‚¿ã¨ãƒ•ã‚©ãƒˆãƒªãƒ•ãƒ¬ã‚¯ã‚¿ã®ãƒ‡ãƒãƒƒã‚°ç”¨é–¢æ•°ã€‚ä½¿ã„ãŸã„ã¨ãã¯whieæ–‡ã®ä¸­èº«ã‚’true(=1)ã«ã™ã‚Œã°ã‚ˆã„
 
 	int phase=judge_phase();
-	//¡‰½‚ğ‚·‚é‚×‚«‚©‚ğ”»’f‚µ‚Äphase‚É’l‚ğ‘ã“ü‚·‚éB‰º‚Ìswitchcase•¶‚Ì•ªŠò‚Ég‚¤
-	
+	//ä»Šä½•ã‚’ã™ã‚‹ã¹ãã‹ã‚’åˆ¤æ–­ã—ã¦phaseã«å€¤ã‚’ä»£å…¥ã™ã‚‹ã€‚ä¸‹ã®switchcaseæ–‡ã®åˆ†å²ã«ä½¿ã†
+
 	//debug_pht();
 	
-	switch(phase){//judge_phase‚ÅŒˆ’è‚µ‚½ƒtƒF[ƒY‚ÉˆÚs‚·‚é
+	switch(phase){//judge_phaseã§æ±ºå®šã—ãŸãƒ•ã‚§ãƒ¼ã‚ºã«ç§»è¡Œã™ã‚‹
 		case case_rescue:
 			rescue();
 			break;
@@ -52,5 +59,6 @@ void loop(){
 		default: 
 			linetrace();
 			break;
+	
 	}
 }

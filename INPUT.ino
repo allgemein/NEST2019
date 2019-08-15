@@ -2,9 +2,10 @@
 #include"pin.h"
 #include"prototype.h"
 
-int get_distance(int position){//�����g�Z���T�ǂݎ��֐�
+int get_distance(int position){//超音波センサにより距離を計測して返す関数
 
-	int Dis,time;
+	unsigned long dur;
+	double Dis;
 
 	switch(position){
 
@@ -14,7 +15,8 @@ int get_distance(int position){//�����g�Z���T�ǂݎ��֐�
 			digitalWrite(USSRtrigR,HIGH);
 			delayMicroseconds(10);
 			digitalWrite(USSRtrigR,LOW);
-			time=pulseIn(USSRechoR,HIGH,100000);
+			dur=pulseIn(USSRechoR,HIGH);
+			break;
 
 		case F_position:	
 			digitalWrite(USSRtrigF,LOW);
@@ -22,7 +24,8 @@ int get_distance(int position){//�����g�Z���T�ǂݎ��֐�
 			digitalWrite(USSRtrigF,HIGH);
 			delayMicroseconds(10);
 			digitalWrite(USSRtrigF,LOW);
-			time=pulseIn(USSRechoF,HIGH,100000);
+			dur=pulseIn(USSRechoF,HIGH);
+			break;
 
 		case L_position:	
 			digitalWrite(USSRtrigL,LOW);
@@ -30,31 +33,30 @@ int get_distance(int position){//�����g�Z���T�ǂݎ��֐�
 			digitalWrite(USSRtrigL,HIGH);
 			delayMicroseconds(10);
 			digitalWrite(USSRtrigL,LOW);
-			time=pulseIn(USSRechoL,HIGH,100000);
-		
-		}
+			dur=pulseIn(USSRechoL,HIGH);
+			break;
 
-	if(time>0){
-		time=time/2;
-		Dis=(time*340*100)/1000000;
+		default:
+			break;
+		}
+		Dis=(dur*340*100)/2000000;
 		Serial.print(Dis);
 		Serial.println(" cm");
-		}
 
 	return Dis;
 
 }
 
-int count_pht_silver(){//��F��ǂݎ�����㕔�t�H�g���t���N�^�̐��𐔂���֐�
+int count_pht_silver(){//後列のフォトリフレクタのうちいくつが銀色を読んでいるかを返す関数
 	int count = 0;
 	if(analogRead(phtLl)>limen_silver) count++;
 	if(analogRead(phtLr)>limen_silver) count++;
 	if(analogRead(phtRl)>limen_silver) count++;
 	if(analogRead(phtRr)>limen_silver) count++;
 	return count;
-}
 
-int count_backpht_black(){//����ǂݎ�����㕔�t�H�g���t���N�^�̐��𐔂���֐�
+}
+int count_backpht_black(){//後列のフォトリフレクタのうちいくつが黒を読んでいるのかを返す関数
 	int count = 0;
 	if(analogRead(phtLl)<limen) count++;
 	if(analogRead(phtLr)<limen) count++;

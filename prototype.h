@@ -10,6 +10,7 @@ int count_backpht_black();
 void turn(int position);
 void rescue();
 void crossing();
-void rightangle();
+void rightangle(int position);
 void obstacle();
 void linetrace();
+void brake();
