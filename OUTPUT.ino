@@ -36,3 +36,15 @@ void brake(){//モータのブレーキ関数。慣性で回り続けるのが�
 	analogWrite(motorR2,255);
 	delay(50);
 }
+
+void rightangle(int position){
+	while(analogRead(phtC)>150){
+		if(position==R_position){
+			MOVE(255,-255);
+		}else{
+			MOVE(-255,255);
+		}
+		delay(10);
+		Serial.println("rightangle");
+	}
+}

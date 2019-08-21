@@ -2,9 +2,10 @@
 void MOVE(int Lpower, int Rpower);
 void debug_pht();
 void debug_motor();
+void debug_USSR();
 int judge_phase();
-int get_distance();
-int get_colorG(int position);
+double get_distance(int position);
+void get_color(int *p);
 int count_pht_silver();
 int count_backpht_black();
 void turn(int position);

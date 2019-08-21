@@ -4,7 +4,9 @@
 
 void crossing(){//交差点処理関数
 	int i,count,num_of_loop_to_back_line_width,greenR,greenL;
+	int color[7]={0,0,0,0,0,0,-1};
 	count = 0;
+
 	while(analogRead(phtLl)>limen && analogRead(phtLr)>limen && analogRead(phtRl)>limen && analogRead(phtRr)>limen &&analogRead(phtC)<limen){//中央センサ黒、その他白となるまで
 
 	MOVE(-150,-150);
@@ -22,8 +24,8 @@ void crossing(){//交差点処理関数
 		delay(50);
 	}//先ほどの後退の所要時間を鑑み、1.5単位ぶん後退して照度センサとカラーマーカの位置を合わせる
 
-	greenR=get_colorG(R_position);
-	greenL=get_colorG(L_position);
+	get_color(color);
+
 	//照度センサで緑の値を取得
 
 	if(greenR>limen_green && greenL<limen_green){

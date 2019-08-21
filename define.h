@@ -14,9 +14,16 @@
 #define L_position 8
 #define Uturn 9
 
-const int basic_motorpower = 70;
+#define RedR 0
+#define GreenR 1
+#define BlueR 2
+#define RedL 3
+#define GreenL 4
+#define BlueL 5
+
+const int basic_motorpower = 50;
 const int boostpower_corner = 30;
-const float p = 0.25;
-const int limen = 750;
+const float p = 0.18;
+const int limen = 550;
 const int limen_green = 800;
 const int limen_silver = 900;

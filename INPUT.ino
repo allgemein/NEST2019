@@ -2,10 +2,10 @@
 #include"pin.h"
 #include"prototype.h"
 
-int get_distance(int position){//超音波センサにより距離を計測して返す関数
+double get_distance(int position){//超音波センサにより距離を計測して返す関数
 
-	unsigned long dur;
-	double Dis;
+	unsigned long dur=0;
+	double Dis=0;
 
 	switch(position){
 
@@ -40,8 +40,6 @@ int get_distance(int position){//超音波センサにより距離を計測し�
 			break;
 		}
 		Dis=(dur*340*100)/2000000;
-		Serial.print(Dis);
-		Serial.println(" cm");
 
 	return Dis;
 

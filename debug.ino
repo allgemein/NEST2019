@@ -38,21 +38,28 @@ void debug_motor(){//モータをデバッグしたいとき用。原則とし�
 
 	}
 
+void debug_USSR(){
+	double disL,disF,disR;
+	char str[254];
+
+	disL=get_distance(L_position);
+	disF=get_distance(F_position);
+	disR=get_distance(R_position);
+	sprintf(str,"L: %2.3fcm  F:%2.3fcm  R:%2.3fcm",disL,disF,disR);
+	Serial.println(str);
+	delay(100);
+}
+
 //以下工事中
 void rescue(){
-	Serial.println("test");
+	Serial.println("testrescue");
 }
-void rightangle(int position){
-	while(analogRead(phtC)>limen){
-		if(position==R_position) MOVE(255,-255);
-		else MOVE(-255,255);
+void get_color(int *p){
+	digitalWrite(0,HIGH);
+	*p=analogRead(ilumL);
+
 	}
-}
-int get_colorG(int position){
-	Serial.println("test");
-	return 1;
-}
 void turn(int position){
-	Serial.println("test");
+	Serial.println("testturn");
 }
 
