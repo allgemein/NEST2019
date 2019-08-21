@@ -1,6 +1,10 @@
 #pragma once
+
+/*プロトタイプ宣言用ヘッダーファイル*/
+
 void MOVE(int Lpower, int Rpower);
 void debug_pht();
+void debug_color();
 void debug_motor();
 void debug_USSR();
 int judge_phase();

@@ -2,7 +2,7 @@
 #include"pin.h"
 #include"prototype.h"
 
-void MOVE(int Lpower,int Rpower){//みんな大好きMOVE関数
+void MOVE(int Lpower,int Rpower){//モータ出力を都合よく行うための関数
 
 	if(Lpower>255) Lpower=255;
 	if(Lpower<-255) Lpower=-255;
@@ -37,14 +37,55 @@ void brake(){//モータのブレーキ関数。慣性で回り続けるのが�
 	delay(50);
 }
 
-void rightangle(int position){
-	while(analogRead(phtC)>150){
-		if(position==R_position){
+void rightangle(int position){//直角処理関数。turnとの違いは十字路が想定されないこと
+
+	while(analogRead(phtC)>100){//中央のフォトリフレクタが黒になるまで
+
+		if(position==R_position){//右に回り続ける
 			MOVE(255,-255);
-		}else{
+		}else{//左に回り続ける
 			MOVE(-255,255);
 		}
-		delay(10);
+
+		delay(5);
 		Serial.println("rightangle");
+
+	}
+
+}
+
+void turn(int position){//交差点処理で用いる直角・Uターン関数
+	int power=255;
+
+	switch(position){//十字路の先を読み取ることによる誤作動を避けるためにいずれの場合も適切な方向に一定時間回転する
+		case R_position:
+			MOVE(power,-power);
+			delay(100);
+			break;
+
+		case L_position:
+			power=-power;
+			MOVE(power,-power);
+			delay(100);
+			break;
+
+		case Uturn:
+			MOVE(power,-power);
+			delay(100);
+
+			while(analogRead(phtC)>limenC){//Uターンの際には二度黒い線を通過することが想定されるので、先に一度直角処理を行っておく
+				MOVE(power,-power);
+				delay(5);
+			}	
+			break;
+
+		default://万一想定外の値が入った際に動かないようpowerに0を代入する
+			power=0;
+			break;
+	}
+
+	while(analogRead(phtC)>limenC){//中央のフォトリフレクタが黒になるまで回転を続ける
+		MOVE(power,-power);
+		delay(5);
 	}
 }

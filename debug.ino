@@ -13,9 +13,21 @@ void debug_pht(){//フォトリフレクタの読み取り値をシリアルモ�
 	sprintf(str,"  pht: %4d%4d%4d%4d%4d",valLl,valLr,valC,valRl,valRr);
 	Serial.println(str);
 
-	}
+}
 
-void debug_motor(){//モータをデバッグしたいとき用。原則として左側が先に動く。
+void debug_color(){//カラーセンサの読み取り値をシリアルモニタに表示する関数
+	int color[6];
+	char str[254];
+
+	get_color(color);
+
+	sprintf(str,"RGB  L:%4d%4d%4d  R:%4d%4d%4d",color[RedL],color[GreenL],color[BlueL],color[RedR],color[GreenR],color[BlueR]);
+	Serial.println(str);
+
+}
+
+
+void debug_motor(){//モータをデバッグしたいとき用。原則として左側が先に動く
 
 	MOVE(255,255);
 	delay(750);
@@ -36,9 +48,9 @@ void debug_motor(){//モータをデバッグしたいとき用。原則とし�
 	MOVE(0,0);
 	delay(250);
 
-	}
+}
 
-void debug_USSR(){
+void debug_USSR(){//3つの超音波センサの読み取り値を表示する関数
 	double disL,disF,disR;
 	char str[254];
 
@@ -50,16 +62,9 @@ void debug_USSR(){
 	delay(100);
 }
 
+
 //以下工事中
 void rescue(){
 	Serial.println("testrescue");
-}
-void get_color(int *p){
-	digitalWrite(0,HIGH);
-	*p=analogRead(ilumL);
-
-	}
-void turn(int position){
-	Serial.println("testturn");
 }
 

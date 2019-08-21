@@ -38,8 +38,8 @@ double get_distance(int position){//超音波センサにより距離を計測�
 
 		default:
 			break;
-		}
-		Dis=(dur*340*100)/2000000;
+	}
+	Dis=(dur*340*100)/2000000;
 
 	return Dis;
 
@@ -61,4 +61,22 @@ int count_backpht_black(){//後列のフォトリフレクタのうちいくつ�
 	if(analogRead(phtRl)<limen) count++;
 	if(analogRead(phtRr)<limen) count++;
 	return count;
+}
+
+void get_color(int *p){//配列の先頭のポインタを引数にとり、疑似的に配列を返す
+
+	digitalWrite(RedLED,HIGH);//RGBそれぞれについてLEDを点灯させ、その時の左右の照度センサの読み取り値を配列に格納する
+	p[RedL]=analogRead(ilumL);
+	p[RedR]=analogRead(ilumR);
+	digitalWrite(RedLED,LOW);
+
+	digitalWrite(GreenLED,HIGH);
+	p[GreenL]=analogRead(ilumL);
+	p[GreenR]=analogRead(ilumR);
+	digitalWrite(GreenLED,LOW);
+
+	digitalWrite(BlueLED,HIGH);
+	p[BlueL]=analogRead(ilumL);
+	p[BlueR]=analogRead(ilumR);
+	digitalWrite(BlueLED,LOW);
 }
