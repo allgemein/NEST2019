@@ -12,6 +12,7 @@
 #define case_Rrightangle 2
 #define case_Lrightangle 3
 #define case_obstacle 4
+#define case_white 5
 
 #define R_position 6
 #define F_position 7
@@ -29,9 +30,9 @@
 /*閾値、比例の係数などの定数の定義*/
 
 const int basic_motorpower = 50;
-const int boostpower_corner = 30;
-const float p = 0.18;
-const int limen = 550;
-const int limenC = 80;
+const int boostpower_corner = 75;
+const float p = 0.15;
+const int limen = 700;
+const int limenC = 70;
 const int limen_green = 800;
 const int limen_silver = 900;

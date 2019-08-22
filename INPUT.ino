@@ -66,16 +66,19 @@ int count_backpht_black(){//後列のフォトリフレクタのうちいくつ�
 void get_color(int *p){//配列の先頭のポインタを引数にとり、疑似的に配列を返す
 
 	digitalWrite(RedLED,HIGH);//RGBそれぞれについてLEDを点灯させ、その時の左右の照度センサの読み取り値を配列に格納する
+	delay(10);
 	p[RedL]=analogRead(ilumL);
 	p[RedR]=analogRead(ilumR);
 	digitalWrite(RedLED,LOW);
 
 	digitalWrite(GreenLED,HIGH);
+	delay(10);
 	p[GreenL]=analogRead(ilumL);
 	p[GreenR]=analogRead(ilumR);
 	digitalWrite(GreenLED,LOW);
-
+	
 	digitalWrite(BlueLED,HIGH);
+	delay(10);
 	p[BlueL]=analogRead(ilumL);
 	p[BlueR]=analogRead(ilumR);
 	digitalWrite(BlueLED,LOW);

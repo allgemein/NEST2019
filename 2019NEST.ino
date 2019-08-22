@@ -32,6 +32,11 @@ void loop(){
 		linetrace();
 	}
 
+	while(0){
+		Serial.println(analogRead(ilumL));
+		delay(100);
+		}
+
 	int phase=judge_phase();//今何をするべきかを判断してphaseに値を代入する。下のswitchcase文の分岐に使う
 
 	debug_pht();
@@ -40,13 +45,21 @@ void loop(){
 		/*case case_rescue:
 		  rescue();
 		  break;
-		  */
 
 		case case_crossing:
 		  crossing();
 		  break;
+		  */
 
-		case case_Rrightangle:
+		case case_white:
+			Serial.println("white");
+			while(count_backpht_black()==0){
+				MOVE(75,75);
+				delay(5);
+			}
+			break;
+
+		/*case case_Rrightangle:
 			rightangle(R_position);
 			break;
 
@@ -54,9 +67,9 @@ void loop(){
 			rightangle(L_position);
 			break;
 
-			/*case case_obstacle:
-				obstacle();
-				break;
+		case case_obstacle:
+			obstacle();
+			break;
 
 			 */
 		default: 
