@@ -39,7 +39,7 @@ void brake(){//モータのブレーキ関数。慣性で回り続けるのが�
 
 void rightangle(int position){//直角処理関数。turnとの違いは十字路が想定されないこと
 
-	while(analogRead(phtC)>100){//中央のフォトリフレクタが黒になるまで
+	while(analogRead(phtC)>limenC){//中央のフォトリフレクタが黒になるまで
 
 		if(position==R_position){//右に回り続ける
 			MOVE(255,-255);
@@ -88,4 +88,10 @@ void turn(int position){//交差点処理で用いる直角・Uターン関数
 		MOVE(power,-power);
 		delay(5);
 	}
+}
+
+void obstacle(){
+	brake();
+	MOVE(-255,-255);
+	delay(500);
 }

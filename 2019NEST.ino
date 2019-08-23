@@ -14,7 +14,7 @@ void setup(){
 void loop(){
 	//デバッグ用関数たち。使いたいときはwhie文の中身をtrue(=1)にすればよい
 	while(0){
-		debug_USSR();
+		Serial.println(get_distance(F_position));
 		delay(50);
 	}
 	while(0){
@@ -46,10 +46,10 @@ void loop(){
 		  rescue();
 		  break;
 
-		case case_crossing:
+		*/case case_crossing:
 		  crossing();
 		  break;
-		  */
+		
 
 		case case_white:
 			Serial.println("white");

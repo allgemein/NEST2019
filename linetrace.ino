@@ -14,14 +14,14 @@ void linetrace(){
 	diff = analogRead(phtLr)-analogRead(phtRl);//左右内側のフォトリフレクタの値の差を取る
 	differential = abs(diff)-abs(previous_diff);//前回のループと今回のループのdiffの差を取り、両者の間での変化の激しさを調べる。この値を用いて微分的な処理などを行う
 
-	if(abs(diff)>700){//diffに激しい変化があった場合
-		fix_power_differential=1.5;//p値の係数を大きくする
-		Serial.println("1.5");
-	}else if(differential<200){//diffの変化が少量であった場合
-		fix_power_differential=0.6;//p値の係数を小さくし
-		Serial.println("0.6");
-		Lpower+=50;
-		Rpower+=50;//左右のモータの基礎出力を上げる
+	if(abs(diff)>450){//diffに激しい変化があった場合
+		fix_power_differential=1.4;//p値の係数を大きくする
+		Serial.println("1.4");
+	}else if(differential<60){//diffの変化が少量であった場合
+		fix_power_differential=0.7;//p値の係数を小さくし
+		Serial.println("0.7");
+		Lpower+=25;
+		Rpower+=25;//左右のモータの基礎出力を上げる
 	}else{//乗算に使う変数なので、どちらでもない場合には影響のないよう1を代入しておく
 		Serial.println("");
 		fix_power_differential=1;

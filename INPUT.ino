@@ -56,10 +56,19 @@ int count_pht_silver(){//後列のフォトリフレクタのうちいくつが�
 }
 int count_backpht_black(){//後列のフォトリフレクタのうちいくつが黒を読んでいるのかを返す関数
 	int count = 0;
-	if(analogRead(phtLl)<limen) count++;
-	if(analogRead(phtLr)<limen) count++;
-	if(analogRead(phtRl)<limen) count++;
-	if(analogRead(phtRr)<limen) count++;
+	if(analogRead(phtLl)<limenB) count++;
+	if(analogRead(phtLr)<limenB) count++;
+	if(analogRead(phtRl)<limenB) count++;
+	if(analogRead(phtRr)<limenB) count++;
+	return count;
+}
+
+int count_backpht_white(){
+	int count = 0;
+	if(analogRead(phtLl)>limenW) count++;
+	if(analogRead(phtLr)>limenW) count++;
+	if(analogRead(phtRl)>limenW) count++;
+	if(analogRead(phtRr)>limenW) count++;
 	return count;
 }
 

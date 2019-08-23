@@ -12,6 +12,7 @@ double get_distance(int position);
 void get_color(int *p);
 int count_pht_silver();
 int count_backpht_black();
+int count_backpht_black();
 void turn(int position);
 void rescue();
 void crossing();
