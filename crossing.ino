@@ -7,15 +7,18 @@ void crossing(){//交差点処理関数
 	int color[6];
 	count = 0;
 
-	while(analogRead(phtLl)>limen && analogRead(phtLr)>limen && analogRead(phtRl)>limen && analogRead(phtRr)>limen &&analogRead(phtC)<limen){//中央センサ黒、その他白となるまで
+	while(1){//中央センサ黒、その他白となるまで
 
 		MOVE(-150,-150);
-		delay(50);
+		delay(5);
 
 		count++;
 		//後退し、その所要時間を計測
 
-	}
+		if(analogRead(phtLl)>limenW && analogRead(phtRr)>limenW) break;//中央センサ黒、その他白となるまで
+}
+
+
 	num_of_loop_to_back_line_width = count;
 	//わかりやすい変数に代入
 

@@ -9,10 +9,22 @@ void setup(){
 	pinMode(USSRtrigL,OUTPUT);
 	pinMode(USSRechoR,INPUT);
 	pinMode(USSRechoL,INPUT);
+	pinMode(RedLED,OUTPUT);
+	pinMode(GreenLED,OUTPUT);
+	pinMode(BlueLED,OUTPUT);
 }
 
 void loop(){
+
 	//デバッグ用関数たち。使いたいときはwhie文の中身をtrue(=1)にすればよい
+	while(0){
+	while((analogRead(phtLl)>limenB && analogRead(phtRr)>limenB)){
+		linetrace();
+	}
+		crossing();
+		delay(500);
+	}
+	
 	while(0){
 		Serial.println(get_distance(F_position));
 		delay(50);
@@ -23,7 +35,7 @@ void loop(){
 	}
 	while(0){
 		debug_color();
-		delay(150);
+		delay(100);
 		}
 	while(0){
 		debug_motor();
@@ -54,7 +66,7 @@ void loop(){
 		case case_white:
 			Serial.println("white");
 			while(count_backpht_black()==0){
-				MOVE(75,75);
+				MOVE(150,150);
 				delay(5);
 			}
 			break;
