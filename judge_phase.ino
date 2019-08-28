@@ -11,7 +11,7 @@ int judge_phase(){
 		phase = case_rescue;//銀テープを通ったとき
 		Serial.println("rescue");
 
-	}else*/if(count_backpht_black()>=3){
+	}else*/if(analogRead(phtLl)<limenB && analogRead(phtRr)<limenB){
 
 		phase = case_crossing;//黒い線の上に乗ったとき
 		Serial.println("crossing");

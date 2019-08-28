@@ -26,18 +26,19 @@
 #define GreenL 4
 #define BlueL 5
 
-#define ave_of_GandB_R ((color[GreenR]+color[BlueR])/2)
-#define ave_of_GandB_L ((color[GreenL]+color[BlueL])/2)
+#define L_limenG ((color[GreenL]+color[BlueL]+1)/10)
+#define R_limenG ((color[GreenR]+color[BlueR]+1)/10)
 
 
 /*閾値、比例の係数などの定数の定義*/
 
-const int basic_motorpower = 50;
+const int basic_motorpower = 100;
 const int boostpower_corner = 75;
-const float p = 0.18;
+const float Kp = 0.18;
+const float Kd = 0.05;
+const float Ki = 0.05;
 const int limen = 850;
 const int limenW = 600;
 const int limenB = 500;
 const int limenC = 100;
-const int limen_green = 800;
 const int limen_silver = 900;

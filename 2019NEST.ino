@@ -16,7 +16,18 @@ void setup(){
 
 void loop(){
 
-	//デバッグ用関数たち。使いたいときはwhie文の中身をtrue(=1)にすればよい
+	while(1){
+		char str[254];
+		int color[6];
+		get_color(color);
+		sprintf(str,"RGB  L:%4d%4d%4d  R:%4d%4d%4d",color[RedL],color[GreenL],color[BlueL],color[RedR],color[GreenR],color[BlueR]);
+		Serial.println(str);
+		if(((color[GreenL]-color[RedL])>L_limenG)||((color[GreenR]-color[RedR])>R_limenG)){
+			Serial.println(50);
+		}
+		delay(100);
+	}
+	//デバッグ用関数たち。使いたいときはwhileの条件式をtrue(=1)にすればよい
 	while(0){
 	while((analogRead(phtLl)>limenB && analogRead(phtRr)>limenB)){
 		linetrace();
