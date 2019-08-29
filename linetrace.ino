@@ -2,7 +2,7 @@
 #include"pin.h"
 #include"prototype.h"
 
-void linetrace(){
+void linetrace_old(){
 	int diff,Lpower,Rpower,differential;
 	Lpower=0;
 	Rpower=0;
@@ -27,8 +27,8 @@ void linetrace(){
 		fix_power_differential=1;
 	}
 
-	Lpower += basic_motorpower+(diff*p*fix_power_differential);
-	Rpower += basic_motorpower-(diff*p*fix_power_differential);//前進するための基礎出力に対し、左右のフォトリフレクタの値の差と比例の係数と先ほどの係数とをかけたものを加算(と減算)する
+	Lpower += basic_motorpower+(diff*Kp*fix_power_differential);
+	Rpower += basic_motorpower-(diff*Kp*fix_power_differential);//前進するための基礎出力に対し、左右のフォトリフレクタの値の差と比例の係数と先ほどの係数とをかけたものを加算(と減算)する
 
 	if(analogRead(phtC)>limenC){//中央のフォトリフレクタが白のとき、角やカーブと判定して出力の差を増強する
 
@@ -58,4 +58,51 @@ void linetrace(){
 	delay(5);//負荷軽減のためにdelayをかける
 
 	previous_diff = diff;//比較に使うために今回のdiffの値を保存しておく
+}
+
+void linetraceONOFF(){
+  int valRr, valRl, valC,valLr, valLl;
+  char str[254];
+
+  valRr = analogRead(phtRr);
+  valRl = analogRead(phtRl);
+  valC = analogRead(phtC);
+  valLr = analogRead(phtLr);
+  valLl = analogRead(phtLl);
+
+  if (valRr < limen) MOVE(255, -200);
+  else if (valLl < limen) MOVE(-200, 255);
+  else if (valRr < limen) MOVE(255, 100);
+  else if (valLr < limen) MOVE(100, 255);
+  else if (valC < limen) MOVE(100 , 100 );
+  else MOVE(100 , 100 );
+
+
+  delay(5);
+
+  sprintf(str, "pht:%4d%4d%4d%4d%4d", valLl, valLr, valC, valRl, valRr);
+  Serial.println(str);
+
+}
+
+void linetrace(){
+	int diff,propotial,integral,differential,Lpower,Rpower;
+	static int previous_diff = 0;
+	static int previous_diff2 = 0;
+
+	diff = analogRead(phtLr)-analogRead(phtRl);
+
+	propotial = Kp*(diff-previous_diff);
+	integral = Ki*diff;
+	differential = Kd*((diff-previous_diff)-(previous_diff-previous_diff2));
+
+	Lpower = basic_motorpower+(propotial+integral+differential);
+	Rpower = basic_motorpower-(propotial+integral+differential);
+
+	MOVE(Lpower,Rpower);
+
+	previous_diff2 = previous_diff;
+	previous_diff = diff;
+	Serial.println(propotial+integral+differential);
+	delay(5);
 }

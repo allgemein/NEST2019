@@ -4,37 +4,14 @@
 
 void setup(){
 	Serial.begin(9600);//シリアル通信を開始。速度は要求されないので9600でいいだろう
-
-	pinMode(USSRtrigR,OUTPUT);//超音波センサ用のデジタルピンのpinMode
-	pinMode(USSRtrigL,OUTPUT);
-	pinMode(USSRechoR,INPUT);
-	pinMode(USSRechoL,INPUT);
-	pinMode(RedLED,OUTPUT);
-	pinMode(GreenLED,OUTPUT);
-	pinMode(BlueLED,OUTPUT);
+	digitalpins_pinMode();
 }
+
+static int limen,limenC;
 
 void loop(){
 
-	while(1){
-		char str[254];
-		int color[6];
-		get_color(color);
-		sprintf(str,"RGB  L:%4d%4d%4d  R:%4d%4d%4d",color[RedL],color[GreenL],color[BlueL],color[RedR],color[GreenR],color[BlueR]);
-		Serial.println(str);
-		if(((color[GreenL]-color[RedL])>L_limenG)||((color[GreenR]-color[RedR])>R_limenG)){
-			Serial.println(50);
-		}
-		delay(100);
-	}
 	//デバッグ用関数たち。使いたいときはwhileの条件式をtrue(=1)にすればよい
-	while(0){
-	while((analogRead(phtLl)>limenB && analogRead(phtRr)>limenB)){
-		linetrace();
-	}
-		crossing();
-		delay(500);
-	}
 	
 	while(0){
 		Serial.println(get_distance(F_position));
@@ -55,24 +32,25 @@ void loop(){
 		linetrace();
 	}
 
-	while(0){
-		Serial.println(analogRead(ilumL));
-		delay(100);
-		}
-
+	
 	int phase=judge_phase();//今何をするべきかを判断してphaseに値を代入する。下のswitchcase文の分岐に使う
+	int array_limen[2];
 
-	debug_pht();
+	set_limen(array_limen);
+	limen = array_limen[0];
+	limenC = array_limen[1];
+
+	//debug_pht();
 
 	switch(phase){//judge_phaseで決定したフェーズに移行する
 		/*case case_rescue:
 		  rescue();
 		  break;
 
-		*/case case_crossing:
+		case case_crossing:
 		  crossing();
 		  break;
-		
+		*/
 
 		case case_white:
 			Serial.println("white");
@@ -82,7 +60,7 @@ void loop(){
 			}
 			break;
 
-		/*case case_Rrightangle:
+		case case_Rrightangle:
 			rightangle(R_position);
 			break;
 
@@ -90,7 +68,7 @@ void loop(){
 			rightangle(L_position);
 			break;
 
-		case case_obstacle:
+		/*case case_obstacle:
 			obstacle();
 			break;
 

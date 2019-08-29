@@ -11,7 +11,7 @@ int judge_phase(){
 		phase = case_rescue;//銀テープを通ったとき
 		Serial.println("rescue");
 
-	}else*/if(analogRead(phtLl)<limenB && analogRead(phtRr)<limenB){
+	}else*/if(analogRead(phtLl)<limen && analogRead(phtRr)<limen){
 
 		phase = case_crossing;//黒い線の上に乗ったとき
 		Serial.println("crossing");
@@ -20,21 +20,19 @@ int judge_phase(){
 		
 		phase = case_white;
 
-	}/*else if(analogRead(phtC)>limenC &&
-		analogRead(phtLl)<limen && analogRead(phtLr)<limen && 
-		analogRead(phtRl)>limen && analogRead(phtRr)>limen){
+	}else if(analogRead(phtC)>limenC &&
+		analogRead(phtLl)<limen && analogRead(phtLr)<limen && analogRead(phtRr)>limen){
 
 		phase = case_Lrightangle;//左側のフォトリフレクタのみ黒になったとき
 
 	}else if(analogRead(phtC)>limenC &&
-			analogRead(phtLl)>limen && analogRead(phtLr)>limen &&
-			analogRead(phtRl)<limen && analogRead(phtRr)<limen){
+			analogRead(phtLl)>limen && analogRead(phtRl)<limen && analogRead(phtRr)<limen){
 
 		phase = case_Rrightangle;//右側のフォトリフレクタのみ黒になったとき
 
-	}*/else if(digitalRead(bumperL)==0){
+	}else if(digitalRead(bumperL)==0){
 
-		phase = case_obstacle;//10cm未満の距離に物体があったとき
+		phase = case_obstacle;//障害物にぶつかったとき
 		Serial.println("obstacle");
 
 	}else {

@@ -68,3 +68,14 @@ void rescue(){
 	Serial.println("testrescue");
 }
 
+void debug_green(){
+	char str[254];
+	int color[6];
+	get_color(color);
+	sprintf(str,"RGB  L:%4d%4d%4d  R:%4d%4d%4d",color[RedL],color[GreenL],color[BlueL],color[RedR],color[GreenR],color[BlueR]);
+	Serial.println(str);
+	if(((color[GreenL]-color[RedL])>L_limenG)||((color[GreenR]-color[RedR])>R_limenG)){
+		Serial.println(50);
+	}
+	delay(100);
+}

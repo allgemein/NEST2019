@@ -34,11 +34,13 @@
 
 const int basic_motorpower = 100;
 const int boostpower_corner = 75;
-const float Kp = 0.18;
-const float Kd = 0.05;
-const float Ki = 0.05;
-const int limen = 850;
-const int limenW = 600;
-const int limenB = 500;
-const int limenC = 100;
+const int default_max_white = 700;
+const int default_min_black = 300;
+const int default_max_whiteC = 180;
+const int default_min_blackC = 20;
+
+//Kp=9.5,周期12ms
+const float Kp = 1.0;
+const float Kd = 0.2;
+const float Ki = 0.3;
 const int limen_silver = 900;
