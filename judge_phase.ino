@@ -62,8 +62,7 @@ int judge_green(){
 
 
 
-	if((map(color[RedL]-previous_redL,0,previous_redL,0,1024)<map(color[GreenL]-previous_greenL,0,previous_greenL,0,1024)) &&
-		!(map(color[GreenL]-previous_greenL,0,previous_greenL,0,1024)>map(color[BlueL]-previous_blueL,0,previous_blueL,0,1024))){
+	if(map(color[RedL]-previous_redL,0,previous_redL,0,100)>40){
 
 		num_green = L_position; 
 

@@ -6,8 +6,8 @@ void crossing(){//交差点処理関数
 
 	int num_green = 0;	
 
-	MOVE(-150,-150);
-	delay(500);
+	MOVE(100,100);
+	delay(1000);
 
 	if(analogRead(phtLl)<limen && (analogRead(phtLr)<limen || phtRl<limen) && analogRead(phtRr)<limen){
 
@@ -17,6 +17,9 @@ void crossing(){//交差点処理関数
 		}
 
 	}else{
+		MOVE(-150,-150);
+		delay(1500);
+
 		while(1){
 			num_green = judge_green();
 			if(analogRead(phtLl)<limen && (analogRead(phtLr)<limen || phtRl<limen) && analogRead(phtRr)<limen) break;
