@@ -93,3 +93,5 @@ void get_color(int *p){//配列の先頭のポインタを引数にとり、疑�
 	digitalWrite(BlueLED,LOW);
 }
 
+void lolicon(){
+}	

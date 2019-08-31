@@ -12,7 +12,7 @@ void digitalpins_pinMode(){
 	pinMode(BlueLED,OUTPUT);
 }
 void set_limen(int *p){
-	int valRr, valRl, valC,valLr,valLl,max_val,min_val,max_valC,min_valC;
+	int valRr, valRl, valC,valLr,valLl,max_val,min_val;
 	
 	static int max_white = default_max_white;
 	static int min_black = default_min_black;
@@ -48,18 +48,13 @@ void set_limen(int *p){
 	}
 
 
-	if (valC>max_valC){
-		max_valC = valC;
-	}else{
-		min_valC = valC;
-	}
 
 
 	if(max_white<max_val) max_white = max_val;
 	if(min_black>min_val) min_black = min_val;
 
-	if(max_whiteC<max_valC) max_whiteC = max_valC;
-	if(min_blackC>min_valC) min_blackC = min_valC;
+	if(max_whiteC<valC) max_whiteC = valC;
+	if(min_blackC>valC) min_blackC = valC;
 	
 	p[0] = (max_white+min_black)/2;
 	p[1] = (max_whiteC+min_blackC)/2;

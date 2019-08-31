@@ -87,6 +87,7 @@ void linetraceONOFF(){
 
 void linetrace(){
 	int diff,propotial,integral,differential,Lpower,Rpower;
+	char str[254];
 	static int previous_diff = 0;
 	static int previous_diff2 = 0;
 
@@ -103,6 +104,23 @@ void linetrace(){
 
 	previous_diff2 = previous_diff;
 	previous_diff = diff;
-	Serial.println(propotial+integral+differential);
+
+	sprintf(str,"power: %4d%4d",Lpower,Rpower);
+
+	Serial.println(str);
+	
 	delay(5);
+}
+
+void white(){
+	int i = 0;
+	while(count_backpht_black()==0){
+		MOVE(150,150);
+		delay(5);
+		if(i==50) break;
+	}
+	while(count_backpht_black()==0){
+		MOVE(-150,-150);
+		delay(5);
+	}
 }

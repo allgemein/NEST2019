@@ -91,7 +91,19 @@ void turn(int position){//交差点処理で用いる直角・Uターン関数
 }
 
 void obstacle(){
+	Serial.println("obstacle");
 	brake();
-	MOVE(-255,-255);
+	MOVE(255,-255);
+	delay(rightangletime);
+	MOVE(255,255);
 	delay(500);
+	MOVE(-255,255);
+	delay(rightangletime);
+	MOVE(255,255);
+	delay(750);
+	MOVE(-255,255);
+	delay(rightangletime);
+	MOVE(255,255);
+	delay(750);
+	turn(R_position);
 }

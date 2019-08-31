@@ -26,21 +26,22 @@
 #define GreenL 4
 #define BlueL 5
 
-#define L_limenG ((color[GreenL]+color[BlueL]+1)/10)
-#define R_limenG ((color[GreenR]+color[BlueR]+1)/10)
+#define L_limenG 50
+#define R_limenG 50
 
 
 /*閾値、比例の係数などの定数の定義*/
 
-const int basic_motorpower = 100;
+const int basic_motorpower = 150;
 const int boostpower_corner = 75;
 const int default_max_white = 700;
 const int default_min_black = 300;
 const int default_max_whiteC = 180;
 const int default_min_blackC = 20;
+const int rightangletime = 300;
 
 //Kp=9.5,周期12ms
-const float Kp = 1.0;
-const float Kd = 0.2;
-const float Ki = 0.3;
+const float Kp = 0.3;
+const float Kd = 0.05;
+const float Ki = 0.1;
 const int limen_silver = 900;

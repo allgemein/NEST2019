@@ -3,31 +3,42 @@
 #include"prototype.h"
 
 void crossing(){//交差点処理関数
-	int color[6];
+
+	int num_green = 0;	
 
 	MOVE(-150,-150);
-	delay(1000);
-	while(1){
-		get_color(color);
-	if(((color[GreenL]-color[RedL])>L_limenG)||((color[GreenR]-color[RedR])>R_limenG)) break;
-		if(phtLl<limen && phtRr<limen) break;
-		linetrace();
-	}
+	delay(500);
 
-	if((!(color[GreenL]-color[RedL])>L_limenG)&&((color[GreenR]-color[RedR])>R_limenG)){
-		turn(R_position);
-	}//右のみ緑の場合右折
+	if(analogRead(phtLl)<limen && (analogRead(phtLr)<limen || phtRl<limen) && analogRead(phtRr)<limen){
 
-	else if(((color[GreenL]-color[RedL])>L_limenG)&&!((color[GreenR]-color[RedR])>R_limenG)){
-		turn(R_position);
-	}//左のみ緑の場合左折
+		while(analogRead(phtLl)<limen && (analogRead(phtLr)<limen || phtRl<limen) && analogRead(phtRr)<limen){
+			MOVE(255,255);
+			delay(10);
+		}
 
-	else if(((color[GreenL]-color[RedL])>L_limenG)&&((color[GreenR]-color[RedR])>R_limenG)){
-		turn(Uturn);
-	}//左右ともに緑の場合Uターン
+	}else{
+		while(1){
+			num_green = judge_green();
+			if(analogRead(phtLl)<limen && (analogRead(phtLr)<limen || phtRl<limen) && analogRead(phtRr)<limen) break;
+			if(num_green!=0) break;
+			linetrace();
+		}
 
-	else{
-		MOVE(150,150);
-		delay(1000);
+		if(num_green==R_position){
+			turn(R_position);
+		}//右のみ緑の場合右折
+
+		else if(num_green==L_position){
+			turn(L_position);
+		}//左のみ緑の場合左折
+
+		else if(num_green==2){
+			turn(Uturn);
+		}//左右ともに緑の場合Uターン
+
+		else{
+			MOVE(150,150);
+			delay(1000);
+		}
 	}
 }
